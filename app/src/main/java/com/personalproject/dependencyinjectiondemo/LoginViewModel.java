@@ -7,6 +7,6 @@ import androidx.lifecycle.ViewModel;
 public class LoginViewModel extends ViewModel {
 
     public LoginViewModel(UserRepository userRepository) {
-        Log.i("LoginViewModel", "LoginViewModel Constructor");
+        Log.i("MyLoginViewModel", "LoginViewModel Constructor");
     }
 }

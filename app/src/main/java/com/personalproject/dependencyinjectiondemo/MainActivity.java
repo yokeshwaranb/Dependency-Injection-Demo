@@ -13,7 +13,7 @@ import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "MyMainActivity";
 
     private LoginViewModel loginViewModel;
 
@@ -30,21 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i(TAG, "onCreate");
 
-        // In order to satisfy the dependencies of LoginViewModel, you have to also
-        // satisfy the dependencies of all of its dependencies recursively.
-        // First, create retrofit which is the dependency of UserRemoteDataSource
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://example.com")
-                .build();
-
-        // Then, satisfy the dependencies of UserRepository
-        UserRemoteDataSource remoteDataSource = new UserRemoteDataSource(retrofit);
-        UserLocalDataSource localDataSource = new UserLocalDataSource();
-
-        // Now you can create an instance of UserRepository that LoginViewModel needs
-        UserRepository userRepository = new UserRepository(localDataSource, remoteDataSource);
-
-        // Lastly, create an instance of LoginViewModel with userRepository
-        loginViewModel = new LoginViewModel(userRepository);
+        // Gets userRepository from the instance of AppContainer in Application
+        AppContainer appContainer = ((MyApplication) getApplication()).appContainer;
+        loginViewModel = new LoginViewModel(appContainer.userRepository);
     }
 }

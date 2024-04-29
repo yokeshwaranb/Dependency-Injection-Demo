@@ -6,7 +6,7 @@ import retrofit2.Retrofit;
 
 class UserLocalDataSource {
     public UserLocalDataSource() {
-        Log.i("UserLocalDataSource", "UserLocalDataSource Constructor");
+        Log.i("MyUserLocalDataSource", "UserLocalDataSource Constructor");
     }
 }
 
@@ -15,7 +15,7 @@ class UserRemoteDataSource {
     private final Retrofit retrofit;
 
     public UserRemoteDataSource(Retrofit retrofit) {
-        Log.i("UserRemoteDataSource", "UserRemoteDataSource Constructor");
+        Log.i("MyUserRemoteDataSource", "UserRemoteDataSource Constructor");
         this.retrofit = retrofit;
     }
 }
@@ -26,7 +26,7 @@ class UserRepository {
     private final UserRemoteDataSource userRemoteDataSource;
 
     public UserRepository(UserLocalDataSource userLocalDataSource, UserRemoteDataSource userRemoteDataSource) {
-        Log.i("UserRepository", "UserRepository Constructor");
+        Log.i("MyUserRepository", "UserRepository Constructor");
         this.userLocalDataSource = userLocalDataSource;
         this.userRemoteDataSource = userRemoteDataSource;
     }
