@@ -16,4 +16,6 @@ public class AppContainer {
 
     // userRepository is not private; it'll be exposed
     public UserRepository userRepository = new UserRepository(localDataSource, remoteDataSource);
+
+    public LoginViewModelFactory loginViewModelFactory = new LoginViewModelFactory(userRepository);
 }

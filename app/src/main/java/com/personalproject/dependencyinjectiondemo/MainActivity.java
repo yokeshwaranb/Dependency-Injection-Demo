@@ -32,6 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Gets userRepository from the instance of AppContainer in Application
         AppContainer appContainer = ((MyApplication) getApplication()).appContainer;
-        loginViewModel = new LoginViewModel(appContainer.userRepository);
+        loginViewModel = appContainer.loginViewModelFactory.create();
     }
 }
