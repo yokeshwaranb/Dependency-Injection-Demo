@@ -15,6 +15,9 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class MyMainActivity extends AppCompatActivity {
 
+    @Inject
+    AnalyticsAdapter analytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
