@@ -1,6 +1,29 @@
 package com.personalproject.dependencyinjectiondemo;
 
+import android.util.Log;
+
 import retrofit2.Retrofit;
+
+// Container with Login-specific dependencies
+class LoginContainer {
+
+    private final UserRepository userRepository;
+
+    public LoginContainer(UserRepository userRepository) {
+        Log.i("MyLoginContainer", "LoginContainer Constructor");
+        this.userRepository = userRepository;
+        loginViewModelFactory = new LoginViewModelFactory(userRepository);
+    }
+
+    public LoginUserData loginData = new LoginUserData();
+
+    public LoginViewModelFactory loginViewModelFactory;
+
+
+}
+
+class LoginUserData {
+}
 
 // Container of objects shared across the whole app
 public class AppContainer {
@@ -17,5 +40,6 @@ public class AppContainer {
     // userRepository is not private; it'll be exposed
     public UserRepository userRepository = new UserRepository(localDataSource, remoteDataSource);
 
-    public LoginViewModelFactory loginViewModelFactory = new LoginViewModelFactory(userRepository);
+    // LoginContainer will be null when the user is NOT in the login flow
+    public LoginContainer loginContainer;
 }

@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MyMainActivity";
 
     private LoginViewModel loginViewModel;
+    private AppContainer appContainer;
+    private LoginUserData loginData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +30,24 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        Log.i(TAG, "onCreate");
+        Log.i(TAG, "onCreate. Login flow has started. Populate loginContainer in AppContainer");
 
-        // Gets userRepository from the instance of AppContainer in Application
-        AppContainer appContainer = ((MyApplication) getApplication()).appContainer;
-        loginViewModel = appContainer.loginViewModelFactory.create();
+        appContainer = ((MyApplication) getApplication()).appContainer;
+
+        // Login flow has started. Populate loginContainer in AppContainer
+        appContainer.loginContainer = new LoginContainer(appContainer.userRepository);
+
+        loginViewModel = appContainer.loginContainer.loginViewModelFactory.create();
+        loginData = appContainer.loginContainer.loginData;
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.i(TAG, "onDestroy. Removing the instance of loginContainer in the AppContainer");
+        // Login flow is finishing
+        // Removing the instance of loginContainer in the AppContainer
+        appContainer.loginContainer = null;
+
+        super.onDestroy();
     }
 }
